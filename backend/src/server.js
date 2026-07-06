@@ -1,12 +1,21 @@
 const app = require("./app");
 const env = require("./config/env");
 
-const PORT = env.PORT;
+const connectDB = require("./database/mongodb");
 
-app.listen(PORT, () => {
-  console.log("==================================");
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`🌍 Environment : ${env.NODE_ENV}`);
-  console.log(`📍 URL : http://localhost:${PORT}`);
-  console.log("==================================");
-});
+const startServer = async () => {
+  try {
+    await connectDB();
+
+    app.listen(env.PORT, () => {
+      console.log("==================================");
+      console.log(`🚀 Server running on Port ${env.PORT}`);
+      console.log(`🌍 Environment : ${env.NODE_ENV}`);
+      console.log("==================================");
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+startServer();
