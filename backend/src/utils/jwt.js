@@ -11,6 +11,9 @@ const verifyAccessToken = (token) => {
   return jwt.verify(token, env.JWT_SECRET);
 };
 
+console.log("JWT_SECRET:", env.JWT_SECRET);
+console.log("JWT_EXPIRES_IN:", env.JWT_EXPIRES_IN);
+
 module.exports = {
   generateAccessToken,
   verifyAccessToken,
