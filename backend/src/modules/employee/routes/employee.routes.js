@@ -5,6 +5,8 @@ const router = express.Router();
 const authenticate = require("../../auth/middleware/authenticate");
 const { authorize } = require("../middleware/authorize");
 const validate = require("../../../middleware/validate");
+const {mongoIdValidator,
+} = require("../../../validators/common.validator");
 
 const {
   createEmployee,
@@ -36,10 +38,12 @@ router.get(
 );
 
 router.get(
-  "/:id",
-  authenticate,
-  authorize("ADMIN"),
-  getEmployeeById
+    "/:id",
+    authenticate,
+    authorize("ADMIN"),
+    mongoIdValidator(),
+    validate,
+    getEmployeeById
 );
 
 router.patch(

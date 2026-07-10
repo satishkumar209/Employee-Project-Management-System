@@ -7,6 +7,10 @@ const { authorize } = require("../../../middleware/authorize");
 const validate = require("../../../middleware/validate");
 
 const {
+  mongoIdValidator,
+} = require("../../../validators/common.Validator");
+
+const {
   createProject,
   getProjects,
   getProjectById,
@@ -52,7 +56,9 @@ router.get(
   "/:id",
   authenticate,
   authorize("ADMIN"),
-  getProjectById
+  getProjectById,
+  mongoIdValidator(),
+  validate,
 );
 
 /**
@@ -64,6 +70,7 @@ router.patch(
   authorize("ADMIN"),
   updateProjectValidator,
   validate,
+  mongoIdValidator(),
   updateProject
 );
 
@@ -74,7 +81,8 @@ router.delete(
   "/:id",
   authenticate,
   authorize("ADMIN"),
-  deleteProject
+  deleteProject,
+   
 );
 
 /**
@@ -86,6 +94,7 @@ router.patch(
   authorize("ADMIN"),
   assignEmployeesValidator,
   validate,
+  mongoIdValidator(),
   assignEmployees
 );
 
@@ -98,6 +107,7 @@ router.patch(
   authorize("ADMIN", "EMPLOYEE"),
   updateProgressValidator,
   validate,
+  mongoIdValidator(),
   updateProgress
 );
 

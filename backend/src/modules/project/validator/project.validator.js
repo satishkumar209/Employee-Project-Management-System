@@ -61,7 +61,15 @@ const updateProjectValidator = [
       "COMPLETED",
       "ON_HOLD",
     ])
+    
     .withMessage("Invalid status"),
+
+    body("progress")
+      .optional()
+      .isInt({
+          min:0,
+          max:100
+      })
 ];
 
 /**

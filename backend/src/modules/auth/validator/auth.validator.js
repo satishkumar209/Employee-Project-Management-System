@@ -1,5 +1,8 @@
 const { body } = require("express-validator");
-
+const {
+  emailValidator,
+  passwordValidator,
+} = require("../../../validators/common.validator");
 const loginValidator = [
   body("email")
     .notEmpty()
@@ -12,6 +15,8 @@ const loginValidator = [
     .withMessage("Password is required")
     .isLength({ min: 6 })
     .withMessage("Password must be at least 6 characters"),
+     emailValidator,
+    passwordValidator,
 ];
 
 module.exports = {
